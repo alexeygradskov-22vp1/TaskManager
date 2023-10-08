@@ -1,0 +1,1 @@
+INSERT INTO users VALUES  (1, 'Administrator', 'qwerty', 'gradskov2015@gmail.com',1)

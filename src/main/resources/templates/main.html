@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <script th:href="@{/js/bootstrap.js}"></script>
+    <meta charset="UTF-8">
+    <title>Доски</title>
+</head>
+<body>
+<table>
+    <tbody>
+    <tr th:if="${boards.isEmpty()}">У вас пока нет досок</tr>
+    <tr th:each="board: ${boards}">
+        <td>
+            <a th:href="@{'/boards/'+${board.getId()}}" style="text-decoration: none;">
+            <div class="card" style="width: 10rem; height: 7rem" type="submit" >
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${board.getName()}"></h5>
+                    <p class="card-text" th:text="${board.getDescription()}"></p>
+                </div>
+            </div>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{'/deleteAccount/'+${user.getId()}}" class="alert-danger">Удалить аккаунт</a>
+<a th:href="@{/logout}" class="link-danger">Выйти</a>
+</body>
+</html>

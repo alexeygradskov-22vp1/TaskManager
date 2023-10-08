@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+<div class="d-flex flex-row justify-content-center align-items-center" style="height: 100vh">
+    <form class="form-check-input" th:action="login" name="login" method="post">
+        <input type="text" class="mt-1 " name="username" value="">
+        <input type="password" class="mt-1" name="password" value="">
+        <input type="submit" class="mt-1" name="submit" value="Войти">
+        <p class="exception-text mt-1"  th:if="${isError}" th:class="${'exception-text'}">Неверный логин или пароль</p>
+    </form>
+</div>
+</body>
+</html>

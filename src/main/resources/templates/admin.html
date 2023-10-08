@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Администрирование системы</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container row-cols-1">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Логин</th>
+            <th scope="col">Почта</th>
+            <th scope="col">Последняя активность</th>
+            <th scope="col">Блокировка</th>
+            <th scope="col" colspan="2" class="text-center">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <th scope="row"><span th:text="${user.getId()}">ID</span></th>
+            <td><span th:text="${user.getLogin()}">Логин</span></td>
+            <td><span th:text="${user.getEmail()}">Email</span></td>
+            <td><span th:text="${#temporals.format(user.getLastActivityDate(), 'dd.MM.yyyy HH:mm')}">Последняя активность</span>
+            </td>
+            <td><span th:text="${user.isLocked()}">false</span></td>
+            <td>
+                <form th:action="@{/admin/blockUser/{userID}(userID=${user.getId()})}" th:method="PUT">
+                    <input type="hidden" name="_method" value="PUT"/>
+                    <button th:class="${user.isLocked()?'block-button unblocked':'block-button blocked'}"
+                            th:text="${user.isLocked() ? 'Разблокировать' : 'Заблокировать'}" type="submit"></button>
+
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin/deleteUser/{userID}(userID=${user.getId()})}" th:method="DELETE">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button th:class="${'delete-button'}" type="submit">Удалить</button>
+                </form>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+</body>
+</html>
