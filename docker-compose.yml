@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '123456'
+      POSTGRES_DB: 'postgresql'
+    ports:
+      - "5431:5432"
+    volumes:
+      - /pg-data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    networks:
+      - backend
+    restart: always
+    ports:
+      - 8000:8000
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 2048M
+        reservations:
+          memory: 200M
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  pg-data:
