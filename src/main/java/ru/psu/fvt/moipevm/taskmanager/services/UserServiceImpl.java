@@ -13,16 +13,14 @@ import org.springframework.stereotype.Service;
 import ru.psu.fvt.moipevm.taskmanager.exceptions.DeleteException;
 import ru.psu.fvt.moipevm.taskmanager.model.Role;
 import ru.psu.fvt.moipevm.taskmanager.model.User;
-import ru.psu.fvt.moipevm.taskmanager.repositories.RoleRepository;
 import ru.psu.fvt.moipevm.taskmanager.repositories.UserRepository;
-import ru.psu.fvt.moipevm.taskmanager.security.SecurityConfig;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements BaseService<User>, UserDetailsService {
+public class UserServiceImpl implements IUserService<User>, UserDetailsService {
     private final UserRepository userRepository;
 
     private final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

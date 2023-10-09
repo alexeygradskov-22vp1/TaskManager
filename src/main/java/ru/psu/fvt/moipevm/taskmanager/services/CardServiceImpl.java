@@ -9,7 +9,7 @@ import ru.psu.fvt.moipevm.taskmanager.repositories.CardRepository;
 import java.util.List;
 
 @Service
-public class CardServiceImpl implements BaseService<Card> {
+public class CardServiceImpl implements ITaskService<Card> {
     private final CardRepository cardRepository;
 
     @Autowired
@@ -40,10 +40,11 @@ public class CardServiceImpl implements BaseService<Card> {
     }
 
     @Override
-    public void delete(int id) throws DeleteException {
-        if (!cardRepository.existsById(id)) {
-            throw new DeleteException("Card don't delete");
-        }
+    public void delete(int id, int userId) throws DeleteException {
+        if (!cardRepository.existsCardByUserId(userId)) throw new DeleteException("No access");
+
+        if (!cardRepository.existsById(id)) throw new DeleteException("Card don't delete");
+
         cardRepository.deleteById(id);
     }
 }

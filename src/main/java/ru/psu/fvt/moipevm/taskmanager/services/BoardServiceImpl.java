@@ -14,7 +14,7 @@ import ru.psu.fvt.moipevm.taskmanager.repositories.BoardRepository;
 import java.util.List;
 
 @Service
-public class BoardServiceImpl implements BaseService<Board> {
+public class BoardServiceImpl implements ITaskService<Board> {
     private final BoardRepository boardRepository;
 
 
@@ -61,7 +61,9 @@ public class BoardServiceImpl implements BaseService<Board> {
 
 
     @Override
-    public void delete(int id) throws DeleteException {
+    public void delete(int id, int userId) throws DeleteException {
+        if (!boardRepository.existsBoardByUserId(userId)) throw new DeleteException("No access!");
+
         if (!boardRepository.existsById(id)) {
             throw new DeleteException("Board don't deleted");
         }

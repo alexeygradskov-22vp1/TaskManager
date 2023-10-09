@@ -66,7 +66,7 @@ public class BoardController {
         try {
             Board board = boardService.read(boardId);
             if (Objects.equals(board.getIdOfUser(), user.getId())){
-                boardService.delete(boardId);
+                boardService.delete(boardId, user.getId());
             }else {
                 return "redirect:/pageNotFound";
             }
