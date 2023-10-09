@@ -39,8 +39,12 @@ public class UserServiceImpl implements IUserService<User>, UserDetailsService {
         }
         if (!user.getPassword()
                 .matches("^(?=.*[A-Z]+)(?=.*\\d+)(?=.*[a-z]+)(?=.*[.,/!?]+).{8,15}$")) {
-            return "Password don't valid:\n" +
-                    "1 digit \n 1 special character \n 1 alphabetic \n min 8 characters";
+            return """
+                    Password don't valid:
+                    1 digit\s
+                     1 special character\s
+                     1 alphabetic\s
+                     min 8 characters""";
         }
         if (user.getPassword().equals(user.getPasswordConfirm())) {
             return "Passwords don't match";

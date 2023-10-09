@@ -1,14 +1,11 @@
 package ru.psu.fvt.moipevm.taskmanager.services;
 
-import jakarta.xml.ws.http.HTTPException;
-import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.psu.fvt.moipevm.taskmanager.exceptions.CreateException;
 import ru.psu.fvt.moipevm.taskmanager.exceptions.DeleteException;
 import ru.psu.fvt.moipevm.taskmanager.exceptions.GetDataException;
 import ru.psu.fvt.moipevm.taskmanager.model.Board;
-import ru.psu.fvt.moipevm.taskmanager.model.User;
 import ru.psu.fvt.moipevm.taskmanager.repositories.BoardRepository;
 
 import java.util.List;
